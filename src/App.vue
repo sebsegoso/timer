@@ -20,22 +20,18 @@ export default {
   data() {
     return {
       contadorSeg: 0,
-      intervalo: 0,
+      intervalo: null,
     };
   },
 
   methods: {
     iniciar(time) {
-      this.contadorSeg = time;
       clearInterval(this.intervalo);
+      this.contadorSeg = time;
 
       this.intervalo = setInterval(() => {
-        this.contadorSeg > 0 ? this.contadorSeg-- : false;
+        this.contadorSeg > 0 ? this.contadorSeg-- : clearInterval(this.intervalo);
       }, 1000);
-
-      setTimeout(() => {
-        clearInterval(this.intervalo);
-      }, (time + 1) * 1000);
     },
   },
 };
